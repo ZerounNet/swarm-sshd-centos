@@ -2,9 +2,9 @@ FROM centos
 
 MAINTAINER ZerounNet
 
-RUN yum --setopt=tsflags=nodocs -y update && \
-    yum --setopt=tsflags=nodocs -y install openssh-server openssh-clients which net-tools bind-utils&& \
-    yum clean all && \
+RUN yum --setopt=tsflags=nodocs -y update ; \
+    yum --setopt=tsflags=nodocs -y install openssh-server openssh-clients which net-tools bind-utils ; \
+    yum clean all ; \
     (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -vf /lib/systemd/system/multi-user.target.wants/*; \
     rm -vf /etc/systemd/system/*.wants/*; \
